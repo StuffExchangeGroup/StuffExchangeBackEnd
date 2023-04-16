@@ -1,0 +1,27 @@
+{
+  "applications": "*",
+  "changelogDate": "20220314040403",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "notification_token",
+  "fields": [
+    {
+      "fieldName": "token",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "NotificationToken",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "notificationToken",
+      "relationshipName": "profile",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

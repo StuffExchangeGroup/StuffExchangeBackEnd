@@ -1,0 +1,154 @@
+<div>
+  <h2 id="page-heading" data-cy="ProfileHeading">
+    <span jhiTranslate="stuffExchangeApp.profile.home.title">Profiles</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="stuffExchangeApp.profile.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-profile"
+        [routerLink]="['/profile/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="stuffExchangeApp.profile.home.createLabel"> Create a new Profile </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="profiles?.length === 0">
+    <span jhiTranslate="stuffExchangeApp.profile.home.notFound">No profiles found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="profiles && profiles.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="displayName">
+            <span jhiTranslate="stuffExchangeApp.profile.displayName">Display Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="balance">
+            <span jhiTranslate="stuffExchangeApp.profile.balance">Balance</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="latitude">
+            <span jhiTranslate="stuffExchangeApp.profile.latitude">Latitude</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="longitude">
+            <span jhiTranslate="stuffExchangeApp.profile.longitude">Longitude</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="avatar">
+            <span jhiTranslate="stuffExchangeApp.profile.avatar">Avatar</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="phone">
+            <span jhiTranslate="stuffExchangeApp.profile.phone">Phone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dob"><span jhiTranslate="stuffExchangeApp.profile.dob">Dob</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="location">
+            <span jhiTranslate="stuffExchangeApp.profile.location">Location</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="countryCode">
+            <span jhiTranslate="stuffExchangeApp.profile.countryCode">Country Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="point">
+            <span jhiTranslate="stuffExchangeApp.profile.point">Point</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="user.id">
+            <span jhiTranslate="stuffExchangeApp.profile.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="city.id">
+            <span jhiTranslate="stuffExchangeApp.profile.city">City</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="level.id">
+            <span jhiTranslate="stuffExchangeApp.profile.level">Level</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let profile of profiles; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/profile', profile.id, 'view']">{{ profile.id }}</a>
+          </td>
+          <td>{{ profile.displayName }}</td>
+          <td>{{ profile.balance }}</td>
+          <td>{{ profile.latitude }}</td>
+          <td>{{ profile.longitude }}</td>
+          <td>{{ profile.avatar }}</td>
+          <td>{{ profile.phone }}</td>
+          <td>{{ profile.dob | formatMediumDatetime }}</td>
+          <td>{{ profile.location }}</td>
+          <td>{{ profile.countryCode }}</td>
+          <td>{{ profile.point }}</td>
+          <td>
+            {{ profile.user?.id }}
+          </td>
+          <td>
+            <div *ngIf="profile.city">
+              <a [routerLink]="['/city', profile.city?.id, 'view']">{{ profile.city?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="profile.level">
+              <a [routerLink]="['/level', profile.level?.id, 'view']">{{ profile.level?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/profile', profile.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/profile', profile.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(profile)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="profiles && profiles.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,160 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-exchange-heading" data-cy="ExchangeCreateUpdateHeading" jhiTranslate="stuffExchangeApp.exchange.home.createOrEditLabel">
+        Create or edit a Exchange
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.exchange.active" for="field_active">Active</label>
+          <input type="checkbox" class="form-check" name="active" id="field_active" data-cy="active" formControlName="active" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.exchange.ownerConfirm" for="field_ownerConfirm"
+            >Owner Confirm</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="ownerConfirm"
+            id="field_ownerConfirm"
+            data-cy="ownerConfirm"
+            formControlName="ownerConfirm"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.exchange.exchangerConfirm" for="field_exchangerConfirm"
+            >Exchanger Confirm</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="exchangerConfirm"
+            id="field_exchangerConfirm"
+            data-cy="exchangerConfirm"
+            formControlName="exchangerConfirm"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.exchange.confirmPhone" for="field_confirmPhone"
+            >Confirm Phone</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="confirmPhone"
+            id="field_confirmPhone"
+            data-cy="confirmPhone"
+            formControlName="confirmPhone"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.exchange.chatting" for="field_chatting">Chatting</label>
+          <input type="checkbox" class="form-check" name="chatting" id="field_chatting" data-cy="chatting" formControlName="chatting" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.exchange.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'stuffExchangeApp.ExchangeStatus.null' | translate }}</option>
+            <option *ngFor="let exchangeStatus of exchangeStatusValues" [value]="exchangeStatus">
+              {{ 'stuffExchangeApp.ExchangeStatus.' + exchangeStatus | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.exchange.sendProduct" for="field_sendProduct"
+            >Send Product</label
+          >
+          <select class="form-control" id="field_sendProduct" data-cy="sendProduct" name="sendProduct" formControlName="sendProduct">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="productOption.id === editForm.get('sendProduct')!.value?.id ? editForm.get('sendProduct')!.value : productOption"
+              *ngFor="let productOption of productsSharedCollection; trackBy: trackProductById"
+            >
+              {{ productOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.exchange.receiveProduct" for="field_receiveProduct"
+            >Receive Product</label
+          >
+          <select
+            class="form-control"
+            id="field_receiveProduct"
+            data-cy="receiveProduct"
+            name="receiveProduct"
+            formControlName="receiveProduct"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                productOption.id === editForm.get('receiveProduct')!.value?.id ? editForm.get('receiveProduct')!.value : productOption
+              "
+              *ngFor="let productOption of productsSharedCollection; trackBy: trackProductById"
+            >
+              {{ productOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.exchange.owner" for="field_owner">Owner</label>
+          <select class="form-control" id="field_owner" data-cy="owner" name="owner" formControlName="owner">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="profileOption.id === editForm.get('owner')!.value?.id ? editForm.get('owner')!.value : profileOption"
+              *ngFor="let profileOption of profilesSharedCollection; trackBy: trackProfileById"
+            >
+              {{ profileOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.exchange.exchanger" for="field_exchanger">Exchanger</label>
+          <select class="form-control" id="field_exchanger" data-cy="exchanger" name="exchanger" formControlName="exchanger">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="profileOption.id === editForm.get('exchanger')!.value?.id ? editForm.get('exchanger')!.value : profileOption"
+              *ngFor="let profileOption of profilesSharedCollection; trackBy: trackProfileById"
+            >
+              {{ profileOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

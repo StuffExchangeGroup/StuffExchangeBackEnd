@@ -1,0 +1,240 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-product-heading" data-cy="ProductCreateUpdateHeading" jhiTranslate="stuffExchangeApp.product.home.createOrEditLabel">
+        Create or edit a Product
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.notice" for="field_notice">Notice</label>
+          <input type="text" class="form-control" name="notice" id="field_notice" data-cy="notice" formControlName="notice" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.location" for="field_location">Location</label>
+          <input type="text" class="form-control" name="location" id="field_location" data-cy="location" formControlName="location" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.verifyPhone" for="field_verifyPhone">Verify Phone</label>
+          <input
+            type="text"
+            class="form-control"
+            name="verifyPhone"
+            id="field_verifyPhone"
+            data-cy="verifyPhone"
+            formControlName="verifyPhone"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'stuffExchangeApp.ProductStatus.null' | translate }}</option>
+            <option *ngFor="let productStatus of productStatusValues" [value]="productStatus">
+              {{ 'stuffExchangeApp.ProductStatus.' + productStatus | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.active" for="field_active">Active</label>
+          <input type="checkbox" class="form-check" name="active" id="field_active" data-cy="active" formControlName="active" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.thumbnail" for="field_thumbnail">Thumbnail</label>
+          <input type="text" class="form-control" name="thumbnail" id="field_thumbnail" data-cy="thumbnail" formControlName="thumbnail" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.point" for="field_point">Point</label>
+          <input type="number" class="form-control" name="point" id="field_point" data-cy="point" formControlName="point" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.favoriteCount" for="field_favoriteCount"
+            >Favorite Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="favoriteCount"
+            id="field_favoriteCount"
+            data-cy="favoriteCount"
+            formControlName="favoriteCount"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.latitude" for="field_latitude">Latitude</label>
+          <input type="number" class="form-control" name="latitude" id="field_latitude" data-cy="latitude" formControlName="latitude" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.longitude" for="field_longitude">Longitude</label>
+          <input type="number" class="form-control" name="longitude" id="field_longitude" data-cy="longitude" formControlName="longitude" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.condition" for="field_condition">Condition</label>
+          <select class="form-control" name="condition" formControlName="condition" id="field_condition" data-cy="condition">
+            <option [ngValue]="null">{{ 'stuffExchangeApp.Condition.null' | translate }}</option>
+            <option *ngFor="let condition of conditionValues" [value]="condition">
+              {{ 'stuffExchangeApp.Condition.' + condition | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.requestCount" for="field_requestCount"
+            >Request Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="requestCount"
+            id="field_requestCount"
+            data-cy="requestCount"
+            formControlName="requestCount"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.receiveCount" for="field_receiveCount"
+            >Receive Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="receiveCount"
+            id="field_receiveCount"
+            data-cy="receiveCount"
+            formControlName="receiveCount"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.isSwapAvailable" for="field_isSwapAvailable"
+            >Is Swap Available</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isSwapAvailable"
+            id="field_isSwapAvailable"
+            data-cy="isSwapAvailable"
+            formControlName="isSwapAvailable"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.auctionTime" for="field_auctionTime">Auction Time</label>
+          <div class="d-flex">
+            <input
+              id="field_auctionTime"
+              data-cy="auctionTime"
+              type="datetime-local"
+              class="form-control"
+              name="auctionTime"
+              formControlName="auctionTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.rating" for="field_rating">Rating</label>
+          <select class="form-control" id="field_rating" data-cy="rating" name="rating" formControlName="rating">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="ratingOption.id === editForm.get('rating')!.value?.id ? editForm.get('rating')!.value : ratingOption"
+              *ngFor="let ratingOption of ratingsCollection; trackBy: trackRatingById"
+            >
+              {{ ratingOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="stuffExchangeApp.product.purpose" for="field_purposes">Purpose</label>
+          <select class="form-control" id="field_purposes" data-cy="purpose" multiple name="purposes" formControlName="purposes">
+            <option
+              [ngValue]="getSelectedProductPurpose(productPurposeOption, editForm.get('purposes')!.value)"
+              *ngFor="let productPurposeOption of productPurposesSharedCollection; trackBy: trackProductPurposeById"
+            >
+              {{ productPurposeOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.city" for="field_city">City</label>
+          <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="cityOption.id === editForm.get('city')!.value?.id ? editForm.get('city')!.value : cityOption"
+              *ngFor="let cityOption of citiesSharedCollection; trackBy: trackCityById"
+            >
+              {{ cityOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.product.profile" for="field_profile">Profile</label>
+          <select class="form-control" id="field_profile" data-cy="profile" name="profile" formControlName="profile">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="profileOption.id === editForm.get('profile')!.value?.id ? editForm.get('profile')!.value : profileOption"
+              *ngFor="let profileOption of profilesSharedCollection; trackBy: trackProfileById"
+            >
+              {{ profileOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

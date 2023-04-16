@@ -1,0 +1,26 @@
+{
+  "stuffExchangeApp": {
+    "productPurpose": {
+      "home": {
+        "title": "Product Purposes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product Purpose",
+        "createOrEditLabel": "Create or edit a Product Purpose",
+        "notFound": "No Product Purposes found"
+      },
+      "created": "A new Product Purpose is created with identifier {{ param }}",
+      "updated": "A Product Purpose is updated with identifier {{ param }}",
+      "deleted": "A Product Purpose is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product Purpose {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Purpose"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "product": "Product"
+    }
+  }
+}

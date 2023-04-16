@@ -1,0 +1,10 @@
+{
+  "stuffExchangeApp": {
+    "Condition": {
+      "null": "",
+      "NEW": "NEW",
+      "LIKENEW": "LIKENEW",
+      "USED": "USED"
+    }
+  }
+}

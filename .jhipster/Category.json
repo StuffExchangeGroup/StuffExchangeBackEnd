@@ -1,0 +1,46 @@
+{
+  "applications": "*",
+  "changelogDate": "20220314040351",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "category",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "thumbnail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Category",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "file",
+      "otherEntityRelationshipName": "category",
+      "ownerSide": true,
+      "relationshipName": "categoryFile",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "productCategory",
+      "otherEntityRelationshipName": "category",
+      "relationshipName": "productCategory",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

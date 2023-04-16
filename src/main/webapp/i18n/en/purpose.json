@@ -1,0 +1,11 @@
+{
+  "stuffExchangeApp": {
+    "Purpose": {
+      "null": "",
+      "EXCHANGE": "EXCHANGE",
+      "SELL": "SELL",
+      "AUCTION": "AUCTION",
+      "GIFT": "GIFT"
+    }
+  }
+}

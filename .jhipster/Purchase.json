@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20220314040358",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "purchase",
+  "fields": [
+    {
+      "fieldName": "purchaseType",
+      "fieldType": "PurchaseType",
+      "fieldValues": "ATM,VISA,PAYPAL"
+    },
+    {
+      "fieldName": "confirmedDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "money",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "MoneyUnit",
+      "fieldValues": "VND,USD"
+    },
+    {
+      "fieldName": "isConfirm",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Purchase",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "purchase",
+      "relationshipName": "profile",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

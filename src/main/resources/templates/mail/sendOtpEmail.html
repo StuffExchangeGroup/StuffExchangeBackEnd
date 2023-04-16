@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+
+<head>
+    <title th:text="#{email.send.otp.title}">JHipster activation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+</head>
+
+<body>
+    <h3 th:text="#{email.activation.greeting(${user.login})}">Chào mừng bạn đến với Stuff Exchange</h3>
+    <p>
+        <span th:text="#{email.activation.text1}">Mã OTP của bạn là: </span> <b th:text="${user.otp}">1234</b>
+    </p>
+    <p>
+        <span th:text="#{email.activation.text2}">Chân thành cảm ơn </span>
+        <br />
+        <em th:text="#{email.signature}">Stuff Exchange team</em>
+    </p>
+</body>
+
+</html>

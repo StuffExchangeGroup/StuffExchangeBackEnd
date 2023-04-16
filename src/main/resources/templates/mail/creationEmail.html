@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+
+<head>
+    <title th:text="#{email.activation.title}">JHipster creation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+</head>
+
+<body>
+    <h3 th:text="#{email.activation.greeting(${user.login})}">Dear</h3>
+    <p th:text="#{email.creation.text1}">Your JHipster account has been created, please click on the URL below to access
+        it:</p>
+    <p>
+    <p th:text="#{email.creation.text2}">So many items</p>
+    <b th:text="#{email.creation.text3}">Best of all:</b>
+    <p>
+        <span th:text="#{email.creation.text4}">Access to account</span>
+        <a th:with="url=(@{|${baseUrl}/login|})" th:href="${url}"
+            th:text="${url}">Login link</a>
+    </p>
+    <p>
+        <span th:text="#{email.activation.text2}">Regards, </span>
+        <br />
+        <em th:text="#{email.signature}">JHipster.</em>
+    </p>
+</body>
+
+</html>

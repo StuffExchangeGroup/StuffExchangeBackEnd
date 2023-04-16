@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="exchange">
+      <h2 data-cy="exchangeDetailsHeading"><span jhiTranslate="stuffExchangeApp.exchange.detail.title">Exchange</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ exchange.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.exchange.active">Active</span></dt>
+        <dd>
+          <span>{{ exchange.active }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.exchange.ownerConfirm">Owner Confirm</span></dt>
+        <dd>
+          <span>{{ exchange.ownerConfirm }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.exchange.exchangerConfirm">Exchanger Confirm</span></dt>
+        <dd>
+          <span>{{ exchange.exchangerConfirm }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.exchange.confirmPhone">Confirm Phone</span></dt>
+        <dd>
+          <span>{{ exchange.confirmPhone }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.exchange.chatting">Chatting</span></dt>
+        <dd>
+          <span>{{ exchange.chatting }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.exchange.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'stuffExchangeApp.ExchangeStatus.' + exchange.status }}">{{ exchange.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.exchange.sendProduct">Send Product</span></dt>
+        <dd>
+          <div *ngIf="exchange.sendProduct">
+            <a [routerLink]="['/product', exchange.sendProduct?.id, 'view']">{{ exchange.sendProduct?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.exchange.receiveProduct">Receive Product</span></dt>
+        <dd>
+          <div *ngIf="exchange.receiveProduct">
+            <a [routerLink]="['/product', exchange.receiveProduct?.id, 'view']">{{ exchange.receiveProduct?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.exchange.owner">Owner</span></dt>
+        <dd>
+          <div *ngIf="exchange.owner">
+            <a [routerLink]="['/profile', exchange.owner?.id, 'view']">{{ exchange.owner?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.exchange.exchanger">Exchanger</span></dt>
+        <dd>
+          <div *ngIf="exchange.exchanger">
+            <a [routerLink]="['/profile', exchange.exchanger?.id, 'view']">{{ exchange.exchanger?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/exchange', exchange.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

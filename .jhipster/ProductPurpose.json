@@ -1,0 +1,33 @@
+{
+  "applications": "*",
+  "changelogDate": "20220401014453",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "product_purpose",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "Purpose",
+      "fieldValues": "EXCHANGE,SELL,AUCTION,GIFT"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ProductPurpose",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "purpose",
+      "ownerSide": false,
+      "relationshipName": "product",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="profile">
+      <h2 data-cy="profileDetailsHeading"><span jhiTranslate="stuffExchangeApp.profile.detail.title">Profile</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ profile.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.displayName">Display Name</span></dt>
+        <dd>
+          <span>{{ profile.displayName }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.balance">Balance</span></dt>
+        <dd>
+          <span>{{ profile.balance }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.latitude">Latitude</span></dt>
+        <dd>
+          <span>{{ profile.latitude }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.longitude">Longitude</span></dt>
+        <dd>
+          <span>{{ profile.longitude }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.avatar">Avatar</span></dt>
+        <dd>
+          <span>{{ profile.avatar }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.phone">Phone</span></dt>
+        <dd>
+          <span>{{ profile.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.dob">Dob</span></dt>
+        <dd>
+          <span>{{ profile.dob | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.location">Location</span></dt>
+        <dd>
+          <span>{{ profile.location }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.countryCode">Country Code</span></dt>
+        <dd>
+          <span>{{ profile.countryCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.point">Point</span></dt>
+        <dd>
+          <span>{{ profile.point }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.user">User</span></dt>
+        <dd>
+          <span>{{ profile.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.city">City</span></dt>
+        <dd>
+          <div *ngIf="profile.city">
+            <a [routerLink]="['/city', profile.city?.id, 'view']">{{ profile.city?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.profile.level">Level</span></dt>
+        <dd>
+          <div *ngIf="profile.level">
+            <a [routerLink]="['/level', profile.level?.id, 'view']">{{ profile.level?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/profile', profile.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

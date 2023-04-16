@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+  <head>
+    <title th:text="#{email.remind.title}">JHipster activation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+  </head>
+  <body>
+    <h3 th:text="#{email.remind.user(${user.login})}">Xin chào</h3>
+    <span th:text="#{email.remind.text0}"></span>
+    <p>
+      <a th:text="#{email.remind.text2}">Nhận thêm điểm </a>
+    </p>
+    <p>
+      <span th:text="#{email.remind.link}"></span>
+      <a th:with="url=(@{|${baseUrl}/login|})" th:href="${url}" th:text="${url}">Login link</a>
+    </p>
+    <p>
+      <span th:text="#{email.remind.text1}">Chân thành cảm ơn </span>
+      <br />
+      <em th:text="#{email.signature}">Stuff Exchange team</em>
+    </p>
+  </body>
+</html>

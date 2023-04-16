@@ -1,0 +1,10 @@
+{
+  "stuffExchangeApp": {
+    "PurchaseType": {
+      "null": "",
+      "ATM": "ATM",
+      "VISA": "VISA",
+      "PAYPAL": "PAYPAL"
+    }
+  }
+}

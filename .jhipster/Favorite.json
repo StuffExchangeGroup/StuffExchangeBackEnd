@@ -1,0 +1,33 @@
+{
+  "applications": "*",
+  "changelogDate": "20220314040355",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "favorite",
+  "fields": [
+    {
+      "fieldName": "createdDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Favorite",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "favorite",
+      "relationshipName": "product",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "favorite",
+      "relationshipName": "profile",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

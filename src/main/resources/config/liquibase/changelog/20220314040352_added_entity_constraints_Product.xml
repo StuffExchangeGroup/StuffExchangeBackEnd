@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Product.
+    -->
+    <changeSet id="20220314040352-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="rating_id"
+                                 baseTableName="product"
+                                 constraintName="fk_product__rating_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rating"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="rel_product__purpose"
+                                 constraintName="fk_rel_product__purpose__product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="purpose_id"
+                                 baseTableName="rel_product__purpose"
+                                 constraintName="fk_rel_product__purpose__purpose_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_purpose"/>
+
+        <addForeignKeyConstraint baseColumnNames="city_id"
+                                 baseTableName="product"
+                                 constraintName="fk_product__city_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="city"/>
+
+        <addForeignKeyConstraint baseColumnNames="profile_id"
+                                 baseTableName="product"
+                                 constraintName="fk_product__profile_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile"/>
+    </changeSet>
+</databaseChangeLog>

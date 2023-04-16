@@ -1,0 +1,25 @@
+{
+  "stuffExchangeApp": {
+    "notificationToken": {
+      "home": {
+        "title": "Notification Tokens",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Notification Token",
+        "createOrEditLabel": "Create or edit a Notification Token",
+        "notFound": "No Notification Tokens found"
+      },
+      "created": "A new Notification Token is created with identifier {{ param }}",
+      "updated": "A Notification Token is updated with identifier {{ param }}",
+      "deleted": "A Notification Token is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Notification Token {{ id }}?"
+      },
+      "detail": {
+        "title": "Notification Token"
+      },
+      "id": "ID",
+      "token": "Token",
+      "profile": "Profile"
+    }
+  }
+}

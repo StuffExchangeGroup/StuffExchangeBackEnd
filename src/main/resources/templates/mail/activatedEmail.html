@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+  <head>
+    <title th:text="#{email.activated.title(${user.login})}">JHipster activation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+  </head>
+
+  <body>
+    <h3 th:text="#{email.activated.user(${user.login})}">Chào mừng bạn đến với Stuff Exchange</h3>
+    <h3 th:text="#{email.activated.greeting(${user.login})}"></h3>
+    <p>
+      <span th:text="#{email.activated.text1}"></span>
+    </p>
+    <p>
+      <span th:text="#{email.activated.text2}"></span>
+    </p>
+    <button th:text="#{email.activated.text3}"></button>
+    <br />
+    <p>
+      <em th:text="#{email.signature}">Stuff Exchange team</em>
+    </p>
+  </body>
+</html>

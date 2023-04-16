@@ -1,0 +1,150 @@
+<div>
+  <h2 id="page-heading" data-cy="ExchangeHeading">
+    <span jhiTranslate="stuffExchangeApp.exchange.home.title">Exchanges</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="stuffExchangeApp.exchange.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-exchange"
+        [routerLink]="['/exchange/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="stuffExchangeApp.exchange.home.createLabel"> Create a new Exchange </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="exchanges?.length === 0">
+    <span jhiTranslate="stuffExchangeApp.exchange.home.notFound">No exchanges found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="exchanges && exchanges.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="active">
+            <span jhiTranslate="stuffExchangeApp.exchange.active">Active</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="ownerConfirm">
+            <span jhiTranslate="stuffExchangeApp.exchange.ownerConfirm">Owner Confirm</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="exchangerConfirm">
+            <span jhiTranslate="stuffExchangeApp.exchange.exchangerConfirm">Exchanger Confirm</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="confirmPhone">
+            <span jhiTranslate="stuffExchangeApp.exchange.confirmPhone">Confirm Phone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="chatting">
+            <span jhiTranslate="stuffExchangeApp.exchange.chatting">Chatting</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="stuffExchangeApp.exchange.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sendProduct.id">
+            <span jhiTranslate="stuffExchangeApp.exchange.sendProduct">Send Product</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="receiveProduct.id">
+            <span jhiTranslate="stuffExchangeApp.exchange.receiveProduct">Receive Product</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="owner.id">
+            <span jhiTranslate="stuffExchangeApp.exchange.owner">Owner</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="exchanger.id">
+            <span jhiTranslate="stuffExchangeApp.exchange.exchanger">Exchanger</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exchange of exchanges; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/exchange', exchange.id, 'view']">{{ exchange.id }}</a>
+          </td>
+          <td>{{ exchange.active }}</td>
+          <td>{{ exchange.ownerConfirm }}</td>
+          <td>{{ exchange.exchangerConfirm }}</td>
+          <td>{{ exchange.confirmPhone }}</td>
+          <td>{{ exchange.chatting }}</td>
+          <td jhiTranslate="{{ 'stuffExchangeApp.ExchangeStatus.' + exchange.status }}">{{ exchange.status }}</td>
+          <td>
+            <div *ngIf="exchange.sendProduct">
+              <a [routerLink]="['/product', exchange.sendProduct?.id, 'view']">{{ exchange.sendProduct?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="exchange.receiveProduct">
+              <a [routerLink]="['/product', exchange.receiveProduct?.id, 'view']">{{ exchange.receiveProduct?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="exchange.owner">
+              <a [routerLink]="['/profile', exchange.owner?.id, 'view']">{{ exchange.owner?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="exchange.exchanger">
+              <a [routerLink]="['/profile', exchange.exchanger?.id, 'view']">{{ exchange.exchanger?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/exchange', exchange.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/exchange', exchange.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(exchange)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="exchanges && exchanges.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,220 @@
+
+
+enum Condition {
+	NEW,
+    LIKENEW,
+    USED
+}
+
+enum ConfirmStatus {
+	ACCEPT,
+    WATTING,
+    CANCEL
+}
+
+enum ExchangeAction {
+	ACCEPT,
+    CANCEL
+}
+
+enum ExchangeStatus {
+	WAITING,
+    SWAPPING,
+    DONE
+}
+
+enum ExchangeType {
+	SENT,
+    RECEIVED
+}
+
+enum MoneyUnit {
+	VND,
+    USD
+}
+
+enum NotificationType {
+	REQUEST_SWAP,
+    ACCEPT_SWAP,
+    CANCEL_SWAP,
+    START_CONVERSATION
+}
+
+enum ProductType {
+	NEWEST,
+    FAVORITE,
+    POPULAR,
+    EXPLORE,
+    FEATURED
+}
+
+enum QueryOperator {
+	IN,
+    LIKE,
+    EQUALS,
+    NOT_EQUALS,
+    NOT_IN
+}
+
+enum ProductStatus {
+	SWAPPED,
+    AVAILABLE
+}
+
+enum PurchaseType {
+	ATM,
+    VISA,
+    PAYPAL
+}
+
+entity Profile {
+	displayName String,
+	balance Double,
+    latitude Double,
+    longitude Double,
+    avatar String,
+    phone String,
+    dob ZonedDateTime,
+    location String,
+    countryCode String
+}
+
+entity Nationality {
+	name String,
+	code String
+}
+
+entity Category {
+	name String,
+	description String,
+    thumbnail String,
+    active Boolean,
+}
+
+entity Product {
+    name String,
+    description String,
+    notice String,
+	location String,
+	verifyPhone String,
+	status ProductStatus,
+	active Boolean,
+	thumbnail String,
+	point Integer,
+    favoriteCount Integer,
+	latitude Double,
+	longitude Double,
+	condition Condition,
+    requestCount Integer,
+    receiveCount Integer,
+    isSwapAvailable Boolean
+}
+
+entity ProductCategory {
+	note String
+}
+
+entity Image {
+	link String,
+	text String
+}
+
+entity Favorite {
+    createdDate ZonedDateTime,
+}
+
+entity Province {
+	name String,
+}
+
+entity Exchange {
+	active Boolean,
+	ownerConfirm Boolean,
+	exchangerConfirm Boolean,
+	confirmPhone String,
+    chatting Boolean,
+    status ExchangeStatus,
+}
+
+entity Purchase {
+	purchaseType PurchaseType,
+    confirmedDate ZonedDateTime,
+    money Double,
+    unit MoneyUnit,
+    isConfirm Boolean
+}
+
+entity Message {
+	title String,
+	content String,
+    read Boolean,
+	isDelete Boolean
+}
+
+entity File {
+    fileName String required,
+    fileOnServer String,
+    relativePath String,
+    amazonS3Url String
+}
+
+entity Level {
+	name String,
+    swapLimit Integer
+}
+
+entity City {
+	name String
+}
+
+entity NotificationToken {
+	token String
+}
+
+entity AppConfiguration {
+	key String,
+    value String,
+    note String,
+}
+
+relationship OneToMany {
+	Nationality{province} to Province{nationality}
+    Province{city} to City{province}
+    City{profile} to Profile{city}
+    City{product} to Product{city}
+    
+    Product{image} to Image{product}
+    Product{sendExchanges} to Exchange{sendProduct}
+    Product{receiveExchanges} to Exchange{receiveProduct}
+    Product{productCategory} to ProductCategory{product}
+    Product{favorite} to Favorite{product}
+    
+    Category{productCategory} to ProductCategory{category}
+    
+    Level{profile} to Profile{level}
+    
+    Profile to Favorite{profile}
+    Profile{ownerExchanges} to Exchange{owner}
+    Profile{exchangerExchanges} to Exchange{exchanger}
+    Profile{purchase} to Purchase{profile}
+    Profile{product} to Product{profile}
+    Profile{notificationToken} to NotificationToken{profile}
+}
+
+relationship OneToOne {
+    Image{imageFile} to File,
+    Category{categoryFile} to File,
+    Profile{user} to User{profile}
+}
+
+// Set pagination options
+paginate * with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20220314040401",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "level",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "swapLimit",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Level",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "level",
+      "relationshipName": "profile",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-purchase-heading" data-cy="PurchaseCreateUpdateHeading" jhiTranslate="stuffExchangeApp.purchase.home.createOrEditLabel">
+        Create or edit a Purchase
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.purchase.purchaseType" for="field_purchaseType"
+            >Purchase Type</label
+          >
+          <select class="form-control" name="purchaseType" formControlName="purchaseType" id="field_purchaseType" data-cy="purchaseType">
+            <option [ngValue]="null">{{ 'stuffExchangeApp.PurchaseType.null' | translate }}</option>
+            <option *ngFor="let purchaseType of purchaseTypeValues" [value]="purchaseType">
+              {{ 'stuffExchangeApp.PurchaseType.' + purchaseType | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.purchase.confirmedDate" for="field_confirmedDate"
+            >Confirmed Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_confirmedDate"
+              data-cy="confirmedDate"
+              type="datetime-local"
+              class="form-control"
+              name="confirmedDate"
+              formControlName="confirmedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.purchase.money" for="field_money">Money</label>
+          <input type="number" class="form-control" name="money" id="field_money" data-cy="money" formControlName="money" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.purchase.unit" for="field_unit">Unit</label>
+          <select class="form-control" name="unit" formControlName="unit" id="field_unit" data-cy="unit">
+            <option [ngValue]="null">{{ 'stuffExchangeApp.MoneyUnit.null' | translate }}</option>
+            <option *ngFor="let moneyUnit of moneyUnitValues" [value]="moneyUnit">
+              {{ 'stuffExchangeApp.MoneyUnit.' + moneyUnit | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.purchase.isConfirm" for="field_isConfirm">Is Confirm</label>
+          <input type="checkbox" class="form-check" name="isConfirm" id="field_isConfirm" data-cy="isConfirm" formControlName="isConfirm" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="stuffExchangeApp.purchase.profile" for="field_profile">Profile</label>
+          <select class="form-control" id="field_profile" data-cy="profile" name="profile" formControlName="profile">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="profileOption.id === editForm.get('profile')!.value?.id ? editForm.get('profile')!.value : profileOption"
+              *ngFor="let profileOption of profilesSharedCollection; trackBy: trackProfileById"
+            >
+              {{ profileOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

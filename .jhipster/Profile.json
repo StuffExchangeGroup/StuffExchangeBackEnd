@@ -1,0 +1,124 @@
+{
+  "applications": "*",
+  "changelogDate": "20220314040349",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "profile",
+  "fields": [
+    {
+      "fieldName": "displayName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "balance",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "avatar",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dob",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "countryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "point",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Profile",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "profile",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "favorite",
+      "otherEntityRelationshipName": "profile",
+      "relationshipName": "favorite",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "exchange",
+      "otherEntityRelationshipName": "owner",
+      "relationshipName": "ownerExchanges",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "exchange",
+      "otherEntityRelationshipName": "exchanger",
+      "relationshipName": "exchangerExchanges",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "purchase",
+      "otherEntityRelationshipName": "profile",
+      "relationshipName": "purchase",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "profile",
+      "relationshipName": "product",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "notificationToken",
+      "otherEntityRelationshipName": "profile",
+      "relationshipName": "notificationToken",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "auction",
+      "otherEntityRelationshipName": "profile",
+      "relationshipName": "auction",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "profile",
+      "relationshipName": "comment",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "city",
+      "otherEntityRelationshipName": "profile",
+      "relationshipName": "city",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "level",
+      "otherEntityRelationshipName": "profile",
+      "relationshipName": "level",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

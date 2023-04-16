@@ -1,0 +1,10 @@
+{
+  "stuffExchangeApp": {
+    "ExchangeStatus": {
+      "null": "",
+      "WAITING": "WAITING",
+      "SWAPPING": "SWAPPING",
+      "DONE": "DONE"
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "applications": "*",
+  "changelogDate": "20220314040352",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "product",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "notice",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "verifyPhone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ProductStatus",
+      "fieldValues": "SWAPPED,AVAILABLE"
+    },
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "thumbnail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "point",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "favoriteCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "condition",
+      "fieldType": "Condition",
+      "fieldValues": "NEW,LIKENEW,USED"
+    },
+    {
+      "fieldName": "requestCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "receiveCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isSwapAvailable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "auctionTime",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Product",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "rating",
+      "otherEntityRelationshipName": "product",
+      "ownerSide": true,
+      "relationshipName": "rating",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "image",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "image",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "exchange",
+      "otherEntityRelationshipName": "sendProduct",
+      "relationshipName": "sendExchanges",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "exchange",
+      "otherEntityRelationshipName": "receiveProduct",
+      "relationshipName": "receiveExchanges",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "productCategory",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productCategory",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "favorite",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "favorite",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "auction",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "auction",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "comment",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "productPurpose",
+      "otherEntityRelationshipName": "product",
+      "ownerSide": true,
+      "relationshipName": "purpose",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "city",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "city",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "profile",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

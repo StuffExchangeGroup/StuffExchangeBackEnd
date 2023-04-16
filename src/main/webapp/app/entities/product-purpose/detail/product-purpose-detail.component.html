@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productPurpose">
+      <h2 data-cy="productPurposeDetailsHeading">
+        <span jhiTranslate="stuffExchangeApp.productPurpose.detail.title">Product Purpose</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productPurpose.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.productPurpose.name">Name</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'stuffExchangeApp.Purpose.' + productPurpose.name }}">{{ productPurpose.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.productPurpose.description">Description</span></dt>
+        <dd>
+          <span>{{ productPurpose.description }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product-purpose', productPurpose.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Province.
+    -->
+    <changeSet id="20220314040356-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="nationality_id"
+                                 baseTableName="province"
+                                 constraintName="fk_province__nationality_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="nationality"/>
+    </changeSet>
+</databaseChangeLog>

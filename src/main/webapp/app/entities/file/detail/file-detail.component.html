@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="file">
+      <h2 data-cy="fileDetailsHeading"><span jhiTranslate="stuffExchangeApp.file.detail.title">File</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ file.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.file.fileName">File Name</span></dt>
+        <dd>
+          <span>{{ file.fileName }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.file.fileOnServer">File On Server</span></dt>
+        <dd>
+          <span>{{ file.fileOnServer }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.file.relativePath">Relative Path</span></dt>
+        <dd>
+          <span>{{ file.relativePath }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.file.amazonS3Url">Amazon S 3 Url</span></dt>
+        <dd>
+          <span>{{ file.amazonS3Url }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/file', file.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

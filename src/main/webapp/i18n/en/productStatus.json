@@ -1,0 +1,9 @@
+{
+  "stuffExchangeApp": {
+    "ProductStatus": {
+      "null": "",
+      "SWAPPED": "SWAPPED",
+      "AVAILABLE": "AVAILABLE"
+    }
+  }
+}

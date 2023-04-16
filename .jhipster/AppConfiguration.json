@@ -1,0 +1,28 @@
+{
+  "applications": "*",
+  "changelogDate": "20220314040404",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "app_configuration",
+  "fields": [
+    {
+      "fieldName": "key",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AppConfiguration",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

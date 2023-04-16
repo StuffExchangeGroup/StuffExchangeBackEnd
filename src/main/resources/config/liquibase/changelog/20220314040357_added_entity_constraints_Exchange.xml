@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Exchange.
+    -->
+    <changeSet id="20220314040357-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="send_product_id"
+                                 baseTableName="exchange"
+                                 constraintName="fk_exchange__send_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="receive_product_id"
+                                 baseTableName="exchange"
+                                 constraintName="fk_exchange__receive_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="exchange"
+                                 constraintName="fk_exchange__owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile"/>
+
+        <addForeignKeyConstraint baseColumnNames="exchanger_id"
+                                 baseTableName="exchange"
+                                 constraintName="fk_exchange__exchanger_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile"/>
+    </changeSet>
+</databaseChangeLog>

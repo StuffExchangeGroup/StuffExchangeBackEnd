@@ -1,0 +1,27 @@
+{
+  "stuffExchangeApp": {
+    "auction": {
+      "home": {
+        "title": "Auctions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Auction",
+        "createOrEditLabel": "Create or edit a Auction",
+        "notFound": "No Auctions found"
+      },
+      "created": "A new Auction is created with identifier {{ param }}",
+      "updated": "A Auction is updated with identifier {{ param }}",
+      "deleted": "A Auction is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Auction {{ id }}?"
+      },
+      "detail": {
+        "title": "Auction"
+      },
+      "id": "ID",
+      "point": "Point",
+      "createdDate": "Created Date",
+      "product": "Product",
+      "profile": "Profile"
+    }
+  }
+}

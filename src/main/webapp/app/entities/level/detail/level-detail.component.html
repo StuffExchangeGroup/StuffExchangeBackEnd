@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="level">
+      <h2 data-cy="levelDetailsHeading"><span jhiTranslate="stuffExchangeApp.level.detail.title">Level</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ level.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.level.name">Name</span></dt>
+        <dd>
+          <span>{{ level.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.level.swapLimit">Swap Limit</span></dt>
+        <dd>
+          <span>{{ level.swapLimit }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/level', level.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

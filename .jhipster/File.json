@@ -1,0 +1,33 @@
+{
+  "applications": "*",
+  "changelogDate": "20220314040400",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "file",
+  "fields": [
+    {
+      "fieldName": "fileName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fileOnServer",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "relativePath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "amazonS3Url",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "File",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

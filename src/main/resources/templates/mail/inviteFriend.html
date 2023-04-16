@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+  <head>
+    <title th:text="#{email.invite.title}">JHipster activation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+  </head>
+  <body>
+    <h3 th:text="#{email.invite.user(${user.login})}">Xin chào</h3>
+    <p>
+      <span th:text="#{email.invite.text0}"
+        >Bạn có muốn kiếm thêm điểm với chúng tôi? Chỉ cần mời thêm bạn bè của mình tham gia với StuffExchange</span
+      >
+    </p>
+    <p th:text="#{email.invite.text1}">Mời bạn bè</p>
+    <p>
+      <span th:text="#{email.invite.text2}">Nhận thêm điểm </span>
+    </p>
+    <p>
+      <span th:text="#{email.invite.link}"></span>
+      <a th:with="url=(@{|${baseUrl}/login|})" th:href="${url}" th:text="${url}">Login link</a>
+    </p>
+    <p>
+      <span th:text="#{email.invite.text3}">Chân thành cảm ơn </span>
+      <br />
+      <em th:text="#{email.signature}">Stuff Exchange team</em>
+    </p>
+  </body>
+</html>

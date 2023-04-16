@@ -1,0 +1,121 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="product">
+      <h2 data-cy="productDetailsHeading"><span jhiTranslate="stuffExchangeApp.product.detail.title">Product</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ product.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.name">Name</span></dt>
+        <dd>
+          <span>{{ product.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.description">Description</span></dt>
+        <dd>
+          <span>{{ product.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.notice">Notice</span></dt>
+        <dd>
+          <span>{{ product.notice }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.location">Location</span></dt>
+        <dd>
+          <span>{{ product.location }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.verifyPhone">Verify Phone</span></dt>
+        <dd>
+          <span>{{ product.verifyPhone }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'stuffExchangeApp.ProductStatus.' + product.status }}">{{ product.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.active">Active</span></dt>
+        <dd>
+          <span>{{ product.active }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.thumbnail">Thumbnail</span></dt>
+        <dd>
+          <span>{{ product.thumbnail }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.point">Point</span></dt>
+        <dd>
+          <span>{{ product.point }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.favoriteCount">Favorite Count</span></dt>
+        <dd>
+          <span>{{ product.favoriteCount }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.latitude">Latitude</span></dt>
+        <dd>
+          <span>{{ product.latitude }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.longitude">Longitude</span></dt>
+        <dd>
+          <span>{{ product.longitude }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.condition">Condition</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'stuffExchangeApp.Condition.' + product.condition }}">{{ product.condition }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.requestCount">Request Count</span></dt>
+        <dd>
+          <span>{{ product.requestCount }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.receiveCount">Receive Count</span></dt>
+        <dd>
+          <span>{{ product.receiveCount }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.isSwapAvailable">Is Swap Available</span></dt>
+        <dd>
+          <span>{{ product.isSwapAvailable }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.auctionTime">Auction Time</span></dt>
+        <dd>
+          <span>{{ product.auctionTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.rating">Rating</span></dt>
+        <dd>
+          <div *ngIf="product.rating">
+            <a [routerLink]="['/rating', product.rating?.id, 'view']">{{ product.rating?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.purpose">Purpose</span></dt>
+        <dd>
+          <span *ngFor="let purpose of product.purposes; let last = last">
+            <a [routerLink]="['/product-purpose', purpose?.id, 'view']">{{ purpose.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.city">City</span></dt>
+        <dd>
+          <div *ngIf="product.city">
+            <a [routerLink]="['/city', product.city?.id, 'view']">{{ product.city?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.product.profile">Profile</span></dt>
+        <dd>
+          <div *ngIf="product.profile">
+            <a [routerLink]="['/profile', product.profile?.id, 'view']">{{ product.profile?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product', product.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

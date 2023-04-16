@@ -1,0 +1,186 @@
+<div>
+  <h2 id="page-heading" data-cy="ProductHeading">
+    <span jhiTranslate="stuffExchangeApp.product.home.title">Products</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="stuffExchangeApp.product.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-product"
+        [routerLink]="['/product/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="stuffExchangeApp.product.home.createLabel"> Create a new Product </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="products?.length === 0">
+    <span jhiTranslate="stuffExchangeApp.product.home.notFound">No products found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="products && products.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name">
+            <span jhiTranslate="stuffExchangeApp.product.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="stuffExchangeApp.product.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="notice">
+            <span jhiTranslate="stuffExchangeApp.product.notice">Notice</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="location">
+            <span jhiTranslate="stuffExchangeApp.product.location">Location</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="verifyPhone">
+            <span jhiTranslate="stuffExchangeApp.product.verifyPhone">Verify Phone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="stuffExchangeApp.product.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="active">
+            <span jhiTranslate="stuffExchangeApp.product.active">Active</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="thumbnail">
+            <span jhiTranslate="stuffExchangeApp.product.thumbnail">Thumbnail</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="point">
+            <span jhiTranslate="stuffExchangeApp.product.point">Point</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="favoriteCount">
+            <span jhiTranslate="stuffExchangeApp.product.favoriteCount">Favorite Count</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="latitude">
+            <span jhiTranslate="stuffExchangeApp.product.latitude">Latitude</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="longitude">
+            <span jhiTranslate="stuffExchangeApp.product.longitude">Longitude</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="condition">
+            <span jhiTranslate="stuffExchangeApp.product.condition">Condition</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="requestCount">
+            <span jhiTranslate="stuffExchangeApp.product.requestCount">Request Count</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="receiveCount">
+            <span jhiTranslate="stuffExchangeApp.product.receiveCount">Receive Count</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="isSwapAvailable">
+            <span jhiTranslate="stuffExchangeApp.product.isSwapAvailable">Is Swap Available</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="auctionTime">
+            <span jhiTranslate="stuffExchangeApp.product.auctionTime">Auction Time</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rating.id">
+            <span jhiTranslate="stuffExchangeApp.product.rating">Rating</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="city.id">
+            <span jhiTranslate="stuffExchangeApp.product.city">City</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="profile.id">
+            <span jhiTranslate="stuffExchangeApp.product.profile">Profile</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a>
+          </td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.notice }}</td>
+          <td>{{ product.location }}</td>
+          <td>{{ product.verifyPhone }}</td>
+          <td jhiTranslate="{{ 'stuffExchangeApp.ProductStatus.' + product.status }}">{{ product.status }}</td>
+          <td>{{ product.active }}</td>
+          <td>{{ product.thumbnail }}</td>
+          <td>{{ product.point }}</td>
+          <td>{{ product.favoriteCount }}</td>
+          <td>{{ product.latitude }}</td>
+          <td>{{ product.longitude }}</td>
+          <td jhiTranslate="{{ 'stuffExchangeApp.Condition.' + product.condition }}">{{ product.condition }}</td>
+          <td>{{ product.requestCount }}</td>
+          <td>{{ product.receiveCount }}</td>
+          <td>{{ product.isSwapAvailable }}</td>
+          <td>{{ product.auctionTime | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="product.rating">
+              <a [routerLink]="['/rating', product.rating?.id, 'view']">{{ product.rating?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="product.city">
+              <a [routerLink]="['/city', product.city?.id, 'view']">{{ product.city?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="product.profile">
+              <a [routerLink]="['/profile', product.profile?.id, 'view']">{{ product.profile?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/product', product.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/product', product.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(product)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="products && products.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

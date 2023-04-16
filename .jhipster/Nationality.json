@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20220314040350",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "nationality",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Nationality",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "province",
+      "otherEntityRelationshipName": "nationality",
+      "relationshipName": "province",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

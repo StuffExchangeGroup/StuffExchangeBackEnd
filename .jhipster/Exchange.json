@@ -1,0 +1,66 @@
+{
+  "applications": "*",
+  "changelogDate": "20220314040357",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "exchange",
+  "fields": [
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "ownerConfirm",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "exchangerConfirm",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "confirmPhone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chatting",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ExchangeStatus",
+      "fieldValues": "WAITING,SWAPPING,DONE"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Exchange",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "sendExchanges",
+      "relationshipName": "sendProduct",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "receiveExchanges",
+      "relationshipName": "receiveProduct",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "ownerExchanges",
+      "relationshipName": "owner",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "exchangerExchanges",
+      "relationshipName": "exchanger",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

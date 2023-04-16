@@ -1,0 +1,51 @@
+{
+  "stuffExchangeApp": {
+    "product": {
+      "home": {
+        "title": "Products",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product",
+        "createOrEditLabel": "Create or edit a Product",
+        "notFound": "No Products found"
+      },
+      "created": "A new Product is created with identifier {{ param }}",
+      "updated": "A Product is updated with identifier {{ param }}",
+      "deleted": "A Product is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product {{ id }}?"
+      },
+      "detail": {
+        "title": "Product"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "notice": "Notice",
+      "location": "Location",
+      "verifyPhone": "Verify Phone",
+      "status": "Status",
+      "active": "Active",
+      "thumbnail": "Thumbnail",
+      "point": "Point",
+      "favoriteCount": "Favorite Count",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "condition": "Condition",
+      "requestCount": "Request Count",
+      "receiveCount": "Receive Count",
+      "isSwapAvailable": "Is Swap Available",
+      "auctionTime": "Auction Time",
+      "rating": "Rating",
+      "image": "Image",
+      "sendExchanges": "Send Exchanges",
+      "receiveExchanges": "Receive Exchanges",
+      "productCategory": "Product Category",
+      "favorite": "Favorite",
+      "auction": "Auction",
+      "comment": "Comment",
+      "purpose": "Purpose",
+      "city": "City",
+      "profile": "Profile"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="auction">
+      <h2 data-cy="auctionDetailsHeading"><span jhiTranslate="stuffExchangeApp.auction.detail.title">Auction</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ auction.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.auction.point">Point</span></dt>
+        <dd>
+          <span>{{ auction.point }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.auction.createdDate">Created Date</span></dt>
+        <dd>
+          <span>{{ auction.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.auction.product">Product</span></dt>
+        <dd>
+          <div *ngIf="auction.product">
+            <a [routerLink]="['/product', auction.product?.id, 'view']">{{ auction.product?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="stuffExchangeApp.auction.profile">Profile</span></dt>
+        <dd>
+          <div *ngIf="auction.profile">
+            <a [routerLink]="['/profile', auction.profile?.id, 'view']">{{ auction.profile?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/auction', auction.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
