@@ -135,7 +135,7 @@ public class ProfileServiceImpl implements ProfileService {
 
         //update user information on firebase
         if (isUpdatedAvatar) {
-            userService.updateUserAvatar(profile);
+            // userService.updateUserAvatar(profile);
         }
         if (isUpdatedEmail) {
             userService.updateUserEmail(profile, user);
