@@ -1,5 +1,6 @@
 package pbm.com.exchange.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -53,12 +54,19 @@ public class CategoryServiceImpl implements CategoryService {
             .map(categoryMapper::toDto);
     }
 
-    @Override
+
     @Transactional(readOnly = true)
-    public Page<CategoryDTO> findAll(Pageable pageable) {
-        log.debug("Request to get all Categories");
-        return categoryRepository.findAll(pageable).map(categoryMapper::toDto);
-    }
+    @Override
+	public List<CategoryDTO> findAll() {
+    	log.debug("Request to get Category ");
+    	List<CategoryDTO> categoryDTOs = new ArrayList<>();
+		List<Category> categories = categoryRepository.findAll();
+		for(Category category : categories) {
+			CategoryDTO categoryDTO =categoryMapper.toDto(category) ;
+			categoryDTOs.add(categoryDTO);
+		}
+		return categoryDTOs;
+	}
 
     @Override
     @Transactional(readOnly = true)
@@ -79,4 +87,7 @@ public class CategoryServiceImpl implements CategoryService {
         boolean activeCategory = true;
         return categoryMapper.toDto(categoryRepository.findByActive(activeCategory));
     }
-}
+
+	
+
+	}
