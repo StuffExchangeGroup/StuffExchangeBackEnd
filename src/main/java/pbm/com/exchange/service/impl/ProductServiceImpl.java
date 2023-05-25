@@ -295,70 +295,70 @@ public class ProductServiceImpl implements ProductService {
         newProduct.setIsGift(false);
         newProduct.setIsSell(false);
         newProduct.setIsAuction(false);
-        newProduct.setIsExchange(false);
+        newProduct.setIsExchange(true);
         newProduct.setIsAuctionNow(false);
-        newProduct.setIsSwapAvailable(false);
-        newProduct.status(null);
-        for (ProductPurpose productPurpose : productPurposes) {
-            // the purpose of product either Gift or (Auction, Exchange, Sell)
-            switch (productPurpose.getName()) {
-                case AUCTION:
-                    // set default startAuctionTime
-                    if (postProductReq.getStartAuctionTime() == null) {
-                        postProductReq.setStartAuctionTime(ZonedDateTime.now());
-                    }
-
-                    // Auction Product  must have endAuctionTime
-                    if (postProductReq.getEndAuctionTime() == null) {
-                        throw new BadRequestException(
-                            MessageHelper.getMessage(Message.Keys.E0096, postProductReq.getCategoryId()),
-                            new Throwable()
-                        );
-                    }
-                    // check startAuctionTime must be less than endAuctionTime if Auction
-                    if (postProductReq.getStartAuctionTime().isAfter(postProductReq.getEndAuctionTime())) {
-                        throw new BadRequestException(
-                            MessageHelper.getMessage(Message.Keys.E0097, postProductReq.getCategoryId()),
-                            new Throwable()
-                        );
-                    }
-
-                    // check auction point is not null
-                    if (postProductReq.getAuctionPoint() == null) {
-                        throw new BadRequestException(MessageHelper.getMessage("Auction point is not null"), new Throwable());
-                    }
-
-                    // if product is Auction right now
-                    if (
-                        postProductReq.getStartAuctionTime().isBefore(ZonedDateTime.now()) ||
-                        postProductReq.getStartAuctionTime().isEqual(ZonedDateTime.now())
-                    ) {
-                        newProduct.setIsAuctionNow(true);
-                    }
-                    newProduct.setIsAuction(true);
-                    newProduct.setCurrentPoint(0.0);
-                    newProduct.setAuctionPoint(postProductReq.getAuctionPoint());
-                    newProduct.setStartAuctionTime(postProductReq.getStartAuctionTime());
-                    newProduct.setEndAuctionTime(postProductReq.getEndAuctionTime());
-                    break;
-                case EXCHANGE:
-                    newProduct.setIsExchange(true);
-                    newProduct.setIsSwapAvailable(true);
-                    newProduct.status(ProductStatus.AVAILABLE);
-                    break;
-                case SELL:
-                    // check sell point is not null
-                    if (postProductReq.getSellPoint() == null) {
-                        throw new BadRequestException(MessageHelper.getMessage("Sell point is not null"), new Throwable());
-                    }
-                    newProduct.setSalePoint(postProductReq.getSellPoint());
-                    newProduct.setIsSell(true);
-                    break;
-                case GIFT:
-                    newProduct.setIsGift(true);
-                    break;
-            }
-        }
+        newProduct.setIsSwapAvailable(true);
+        newProduct.status(ProductStatus.AVAILABLE);
+//        for (ProductPurpose productPurpose : productPurposes) {
+//            // the purpose of product either Gift or (Auction, Exchange, Sell)
+//            switch (productPurpose.getName()) {
+//                case AUCTION:
+//                    // set default startAuctionTime
+//                    if (postProductReq.getStartAuctionTime() == null) {
+//                        postProductReq.setStartAuctionTime(ZonedDateTime.now());
+//                    }
+//
+//                    // Auction Product  must have endAuctionTime
+//                    if (postProductReq.getEndAuctionTime() == null) {
+//                        throw new BadRequestException(
+//                            MessageHelper.getMessage(Message.Keys.E0096, postProductReq.getCategoryId()),
+//                            new Throwable()
+//                        );
+//                    }
+//                    // check startAuctionTime must be less than endAuctionTime if Auction
+//                    if (postProductReq.getStartAuctionTime().isAfter(postProductReq.getEndAuctionTime())) {
+//                        throw new BadRequestException(
+//                            MessageHelper.getMessage(Message.Keys.E0097, postProductReq.getCategoryId()),
+//                            new Throwable()
+//                        );
+//                    }
+//
+//                    // check auction point is not null
+//                    if (postProductReq.getAuctionPoint() == null) {
+//                        throw new BadRequestException(MessageHelper.getMessage("Auction point is not null"), new Throwable());
+//                    }
+//
+//                    // if product is Auction right now
+//                    if (
+//                        postProductReq.getStartAuctionTime().isBefore(ZonedDateTime.now()) ||
+//                        postProductReq.getStartAuctionTime().isEqual(ZonedDateTime.now())
+//                    ) {
+//                        newProduct.setIsAuctionNow(true);
+//                    }
+//                    newProduct.setIsAuction(true);
+//                    newProduct.setCurrentPoint(0.0);
+//                    newProduct.setAuctionPoint(postProductReq.getAuctionPoint());
+//                    newProduct.setStartAuctionTime(postProductReq.getStartAuctionTime());
+//                    newProduct.setEndAuctionTime(postProductReq.getEndAuctionTime());
+//                    break;
+//                case EXCHANGE:
+//                    newProduct.setIsExchange(true);
+//                    newProduct.setIsSwapAvailable(true);
+//                    newProduct.status(ProductStatus.AVAILABLE);
+//                    break;
+//                case SELL:
+//                    // check sell point is not null
+//                    if (postProductReq.getSellPoint() == null) {
+//                        throw new BadRequestException(MessageHelper.getMessage("Sell point is not null"), new Throwable());
+//                    }
+//                    newProduct.setSalePoint(postProductReq.getSellPoint());
+//                    newProduct.setIsSell(true);
+//                    break;
+//                case GIFT:
+//                    newProduct.setIsGift(true);
+//                    break;
+//            }
+//        }
 
         newProduct = productRepository.save(newProduct);
 
@@ -702,6 +702,8 @@ public class ProductServiceImpl implements ProductService {
 
         // filter by status : AVAILABLE
         filters = filterByStatus(filters, Status.AVAILABLE);
+        
+        filters = filterByIsBlock(filters);
 
         // filter by search name
         if (criteriaDTO.getSearch() != null) {
@@ -917,6 +919,17 @@ public class ProductServiceImpl implements ProductService {
         filter.setField(Product_.STATUS);
         filter.setOperator(QueryOperator.EQUALS);
         filter.setValue(Status.AVAILABLE.toString());
+
+        filters.add(filter);
+        return filters;
+    }
+
+    @Override
+    public List<Filter> filterByIsBlock(List<Filter> filters) {
+        Filter filter = new Filter();
+        filter.setField(Product_.IS_BLOCK);
+        filter.setOperator(QueryOperator.EQUALS);
+        filter.setValue(String.valueOf(false));
 
         filters.add(filter);
         return filters;
@@ -1155,7 +1168,7 @@ public class ProductServiceImpl implements ProductService {
 
         // filter by status : AVAILABLE
         filters = filterByStatus(filters, Status.AVAILABLE);
-
+        filters = filterByIsBlock(filters);
         // filter by search name
         if (filterDTO.getSearch() != null) {
             searchFilters = filterBySearchName(searchFilters, filterDTO.getSearch());

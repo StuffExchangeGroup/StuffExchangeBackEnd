@@ -68,6 +68,8 @@ public class ProductDTO implements Serializable {
     private Boolean isExchange;
 
     private Boolean isGift;
+    
+    private Boolean isBlock;
 
     private ZonedDateTime createdDate;
 }

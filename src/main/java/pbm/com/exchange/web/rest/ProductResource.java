@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import pbm.com.exchange.domain.Product;
 import pbm.com.exchange.repository.ProductRepository;
 import pbm.com.exchange.service.ProductService;
 import pbm.com.exchange.service.dto.ProductDTO;
@@ -44,6 +46,25 @@ public class ProductResource {
     public ProductResource(ProductService productService, ProductRepository productRepository) {
         this.productService = productService;
         this.productRepository = productRepository;
+    }
+    
+    @PutMapping("/products/block/{id}")
+    public ResponseEntity<Boolean> blockProduct(
+        @PathVariable(value = "id", required = false) final Long id
+    ) throws URISyntaxException {
+        log.debug("REST request to update Product : {}", id);
+
+        Optional<Product> productOtional = productRepository.findById(id);
+        if (!productOtional.isPresent()) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        Product product = productOtional.get();        product.setIsBlock(!product.getIsBlock());
+        
+        productRepository.save(product);
+        
+        return ResponseEntity
+            .ok(true);
     }
 
     /**

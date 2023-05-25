@@ -149,6 +149,8 @@ public interface ProductService {
 
     List<Filter> filterByStatus(List<Filter> filters, Status status);
 
+    List<Filter> filterByIsBlock(List<Filter> filters);
+
     List<Filter> filterByLocation(List<Filter> filters, String location);
 
     List<Filter> filterByCity(List<Filter> filters, Long cityId);

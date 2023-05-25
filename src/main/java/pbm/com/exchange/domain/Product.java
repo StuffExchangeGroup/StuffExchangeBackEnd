@@ -118,7 +118,18 @@ public class Product extends AbstractAuditingEntity {
     @Column(name = "current_point")
     private Double currentPoint;
 
-    @JsonIgnoreProperties(value = { "product" }, allowSetters = true)
+    @Column(name = "is_block", columnDefinition = "boolean default false")
+    private Boolean isBlock ;
+    
+    public Boolean getIsBlock() {
+		return this.isBlock;
+	}
+
+	public void setIsBlock(Boolean isBlock) {
+		this.isBlock = isBlock;
+	}
+
+	@JsonIgnoreProperties(value = { "product" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
     private Rating rating;
