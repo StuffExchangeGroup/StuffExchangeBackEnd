@@ -548,7 +548,7 @@ public class UserService {
     public String generateRandomOTP() {
         // random otp
         Random random = new Random();
-        return String.format("%04d", random.nextInt(10000));
+        return String.format("%04d", (random.nextInt(9999) + 1000));
     }
 
     public SignInRes checkOTPSignUpAndActiveUser(CheckOTPSignUpReq checkOTPReq) {
