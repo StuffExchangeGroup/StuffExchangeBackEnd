@@ -2,8 +2,11 @@ package pbm.com.exchange.app.rest.respone;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.ZonedDateTime;
+import java.util.Set;
+
 import lombok.Builder;
 import lombok.Data;
+import pbm.com.exchange.domain.Authority;
 
 @Data
 @Builder
@@ -43,4 +46,6 @@ public class UserRes {
     private String uid;
 
     private Integer point;
+    
+    private Set<Authority> authorities;
 }

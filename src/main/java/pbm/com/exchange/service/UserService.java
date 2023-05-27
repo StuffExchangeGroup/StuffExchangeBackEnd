@@ -717,6 +717,7 @@ public class UserService {
             .customTokenFirebase(customUserToken)
             .build();
 
+        userRes.setAuthorities(user.getAuthorities());
         // Send OPT
         /*
          * boolean hasOTP;
