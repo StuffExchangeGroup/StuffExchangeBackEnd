@@ -693,6 +693,9 @@ public class UserService {
         User user = userRepository.findOneWithAuthoritiesByLogin(authentication.getName()).get();
         Profile profile = profileRepository.findOneByUser(user).get();
 
+        if (user.getIsBlock()) {
+        	throw new AuthenticationException(MessageHelper.getMessage("Tài khoản của bạn đã bị khóa, vui lòng liên hệ với admin"), new Throwable());
+        }
         // make custom token firebase for curruntUser
         String customUserToken = this.generateCustomTokenFirebase(user);
 

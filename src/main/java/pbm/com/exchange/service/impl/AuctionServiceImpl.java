@@ -104,19 +104,19 @@ public class AuctionServiceImpl implements AuctionService {
 
         Double auctionPoint = auctionReq.getAuctionPoint();
         // check auction point > current point
-        if (auctionPoint <= product.getCurrentPoint()) {
-            throw new BadRequestException(MessageHelper.getMessage(Message.Keys.E0095), new Throwable());
-        }
-
-        // save data
-        product.setCurrentPoint(auctionPoint);
-        product = productRepository.save(product);
-
-        // get current profile
-        Profile profile = profileService.getCurrentProfile();
-
-        Auction auction = Auction.builder().point(auctionPoint).product(product).profile(profile).createdDate(ZonedDateTime.now()).build();
-        auctionRepository.save(auction);
+//        if (auctionPoint <= product.getCurrentPoint()) {
+//            throw new BadRequestException(MessageHelper.getMessage(Message.Keys.E0095), new Throwable());
+//        }
+//
+//        // save data
+//        product.setCurrentPoint(auctionPoint);
+//        product = productRepository.save(product);
+//
+//        // get current profile
+//        Profile profile = profileService.getCurrentProfile();
+//
+//        Auction auction = Auction.builder().point(auctionPoint).product(product).profile(profile).createdDate(ZonedDateTime.now()).build();
+//        auctionRepository.save(auction);
     }
 
     @Override

@@ -88,19 +88,19 @@ public class Product extends AbstractAuditingEntity {
     @Column(name = "is_swap_available")
     private Boolean isSwapAvailable;
 
-    @Column(name = "is_exchange")
+    @Column(name = "is_exchange", columnDefinition = "boolean default true")
     private Boolean isExchange;
 
-    @Column(name = "is_auction")
+    @Column(name = "is_auction", columnDefinition = "boolean default false")
     private Boolean isAuction;
 
-    @Column(name = "is_auction_now")
+    @Column(name = "is_auction_now", columnDefinition = "boolean default false")
     private Boolean isAuctionNow;
 
-    @Column(name = "is_sell")
+    @Column(name = "is_sell", columnDefinition = "boolean default false")
     private Boolean isSell;
 
-    @Column(name = "is_gift")
+    @Column(name = "is_gift", columnDefinition = "boolean default false")
     private Boolean isGift;
 
     @Column(name = "start_auction_time")

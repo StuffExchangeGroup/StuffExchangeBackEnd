@@ -231,7 +231,7 @@ public class ProductServiceImpl implements ProductService {
         productDTO.setCityName(city.getName());
         productDTO.setImageLinks(imageLinks);
         productDTO.setProductCondition(product.getCondition());
-        productDTO.setIsGift(product.getIsGift());
+//        productDTO.setIsGift(product.getIsGift());
         productDTO.setIsExchange(product.getIsExchange());
 
         return productDTO;
@@ -292,11 +292,11 @@ public class ProductServiceImpl implements ProductService {
         newProduct.setCondition(postProductReq.getCondition());
         newProduct.setPurposes(productPurposes);
         // set purpose for product
-        newProduct.setIsGift(false);
-        newProduct.setIsSell(false);
-        newProduct.setIsAuction(false);
-        newProduct.setIsExchange(true);
-        newProduct.setIsAuctionNow(false);
+//        newProduct.setIsGift(false);
+//        newProduct.setIsSell(false);
+//        newProduct.setIsAuction(false);
+//        newProduct.setIsExchange(true);
+//        newProduct.setIsAuctionNow(false);
         newProduct.setIsSwapAvailable(true);
         newProduct.status(ProductStatus.AVAILABLE);
 //        for (ProductPurpose productPurpose : productPurposes) {
@@ -539,9 +539,9 @@ public class ProductServiceImpl implements ProductService {
                 .categoryName(categoryName)
                 .avatar(similarProduct.getProfile().getAvatar())
                 .isExchange(similarProduct.getIsExchange())
-                .isGift(similarProduct.getIsGift())
-                .isSell(similarProduct.getIsSell())
-                .isAuction(similarProduct.getIsAuction())
+//                .isGift(similarProduct.getIsGift())
+//                .isSell(similarProduct.getIsSell())
+//                .isAuction(similarProduct.getIsAuction())
                 .build();
 
             SimilarProductRess.add(similarProductDTO);
@@ -615,14 +615,14 @@ public class ProductServiceImpl implements ProductService {
             // the purpose of product either Gift or (Auction, Exchange, Sell)
             switch (productPurpose.getName()) {
                 case EXCHANGE:
-                    product.setIsGift(false);
+//                    product.setIsGift(false);
                     product.setIsExchange(true);
                     break;
                 case GIFT:
-                    product.setIsGift(true);
+//                    product.setIsGift(true);
                     product.setIsExchange(false);
-                    product.setIsAuction(false);
-                    product.setIsSell(false);
+//                    product.setIsAuction(false);
+//                    product.setIsSell(false);
                     break;
                 default:
                     break;
@@ -1275,4 +1275,6 @@ public class ProductServiceImpl implements ProductService {
         
         return this.getProductDetail(productId);
     }
+
+    
 }
