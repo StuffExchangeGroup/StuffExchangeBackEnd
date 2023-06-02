@@ -548,7 +548,7 @@ public class UserService {
     public String generateRandomOTP() {
         // random otp
         Random random = new Random();
-        return String.format("%04d", random.nextInt(10000));
+        return String.format("%04d", (random.nextInt(9999) + 1000));
     }
 
     public SignInRes checkOTPSignUpAndActiveUser(CheckOTPSignUpReq checkOTPReq) {
@@ -693,6 +693,9 @@ public class UserService {
         User user = userRepository.findOneWithAuthoritiesByLogin(authentication.getName()).get();
         Profile profile = profileRepository.findOneByUser(user).get();
 
+        if (user.getIsBlock()) {
+        	throw new AuthenticationException(MessageHelper.getMessage("Tài khoản của bạn đã bị khóa, vui lòng liên hệ với admin"), new Throwable());
+        }
         // make custom token firebase for curruntUser
         String customUserToken = this.generateCustomTokenFirebase(user);
 
@@ -717,6 +720,7 @@ public class UserService {
             .customTokenFirebase(customUserToken)
             .build();
 
+        userRes.setAuthorities(user.getAuthorities());
         // Send OPT
         /*
          * boolean hasOTP;

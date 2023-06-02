@@ -50,6 +50,8 @@ public class AdminUserDTO {
     private ZonedDateTime lastModifiedDate;
 
     private Set<String> authorities;
+    
+    public Boolean isBlock;
 
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
@@ -63,6 +65,7 @@ public class AdminUserDTO {
         this.email = user.getEmail();
         this.activated = user.isActivated();
         this.imageUrl = user.getImageUrl();
+        this.isBlock = user.getIsBlock();
         this.langKey = user.getLangKey();
         this.createdBy = user.getCreatedBy();
         this.createdDate = user.getCreatedDate();
@@ -71,7 +74,15 @@ public class AdminUserDTO {
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
     }
 
-    public Long getId() {
+    public Boolean getIsBlock() {
+		return isBlock;
+	}
+
+	public void setIsBlock(Boolean isBlock) {
+		this.isBlock = isBlock;
+	}
+
+	public Long getId() {
         return id;
     }
 

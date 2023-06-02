@@ -98,6 +98,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "temp_email")
     private String tempEmail;
 
+    @Column(name = "is_block", columnDefinition = "boolean default false")
+    private Boolean isBlock;
+    
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -269,4 +272,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activationKey='" + activationKey + '\'' +
             "}";
     }
+
+	public Boolean getIsBlock() {
+		return isBlock;
+	}
+
+	public void setIsBlock(Boolean isBlock) {
+		this.isBlock = isBlock;
+	}
 }
