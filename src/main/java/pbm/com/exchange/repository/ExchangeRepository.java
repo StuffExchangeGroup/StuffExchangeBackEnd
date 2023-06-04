@@ -45,4 +45,6 @@ public interface ExchangeRepository extends JpaRepository<Exchange, Long> {
     boolean existsBySendProductOrReceiveProduct(Product sendProduct, Product receiveProduct);
 
     Long countBySendProductOrReceiveProduct(Product sendProduct, Product receiveProduct);
+    
+    Long countByStatus(ExchangeStatus status);
 }

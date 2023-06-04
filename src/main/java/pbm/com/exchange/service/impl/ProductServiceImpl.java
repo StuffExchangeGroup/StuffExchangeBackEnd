@@ -291,6 +291,8 @@ public class ProductServiceImpl implements ProductService {
         newProduct.setFavoriteCount(0);
         newProduct.setCondition(postProductReq.getCondition());
         newProduct.setPurposes(productPurposes);
+        newProduct.setIsBlock(true);
+        
         // set purpose for product
 //        newProduct.setIsGift(false);
 //        newProduct.setIsSell(false);
