@@ -13,7 +13,7 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 application:
-  uploadFolder: D:/AllProject/Thuy/StuffExchangeBackEnd/image
+  uploadFolder: D:/ThuThuy/bmbe/image
   
 logging:
   level:
@@ -41,7 +41,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/stuffexchange?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
     username: root
-    password: root
+    password: 12345678
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -139,7 +139,7 @@ twilio:
 
 avatar:
   default:
-    user: 'http://zeusbe.emclab.tech/api/app/image/download/33'
+    user: 'http://localhost:8082/api/app/image/download/676'
 
 mail:
   default:

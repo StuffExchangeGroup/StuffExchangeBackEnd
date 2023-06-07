@@ -469,6 +469,7 @@ public class UserService {
             .email(signUpReq.getEmail())
             .otp(generateRandomOTP())
             .activated(active)
+            .isBlock(false)
             .build();
         newUser = userRepository.save(newUser);
         this.clearUserCaches(newUser);
