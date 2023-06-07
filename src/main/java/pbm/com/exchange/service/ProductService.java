@@ -52,7 +52,7 @@ public interface ProductService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<ProductDTO> findAll(Pageable pageable);
+    Page<ProductDTO> findAll(Integer status, Pageable pageable);
 
     /**
      * Get all the products with eager load of many-to-many relationships.

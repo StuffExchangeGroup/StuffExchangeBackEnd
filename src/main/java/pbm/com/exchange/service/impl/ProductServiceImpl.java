@@ -153,9 +153,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(Pageable pageable) {
+    public Page<ProductDTO> findAll(Integer status, Pageable pageable) {
         log.debug("Request to get all Products");
-        return productRepository.findAll(pageable).map(productMapper::toDto);
+        Sort sortByCreatedDate = Sort.by(Order.desc("createdDate"));
+        pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sortByCreatedDate);
+        if (status == 0) {
+        	return productRepository.findAll(pageable).map(productMapper::toDto);
+        } else if (status == 1) {
+        	return productRepository.findByIsBlock(true, pageable).map(productMapper::toDto);
+        }else {
+        	return productRepository.findByIsBlock(false, pageable).map(productMapper::toDto);
+        }
+        
     }
 
     public Page<ProductDTO> findAllWithEagerRelationships(Pageable pageable) {

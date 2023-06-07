@@ -166,6 +166,7 @@ public class ProductResource {
      */
     @GetMapping("/products")
     public ResponseEntity<List<ProductDTO>> getAllProducts(
+    		@RequestParam(required = false) Integer status,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable,
         @RequestParam(required = false, defaultValue = "false") boolean eagerload
     ) {
@@ -174,7 +175,7 @@ public class ProductResource {
         if (eagerload) {
             page = productService.findAllWithEagerRelationships(pageable);
         } else {
-            page = productService.findAll(pageable);
+            page = productService.findAll(status, pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());

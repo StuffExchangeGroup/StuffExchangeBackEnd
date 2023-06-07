@@ -70,4 +70,6 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
     List<String> findAllProductLocations();
     
     boolean existsByIdAndProfile(Long id, Profile profile);
+    
+    Page<Product> findByIsBlock(boolean status, Pageable pageable);
 }
