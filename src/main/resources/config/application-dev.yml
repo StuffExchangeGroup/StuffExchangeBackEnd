@@ -139,7 +139,7 @@ twilio:
 
 avatar:
   default:
-    user: 'http://localhost:8082/api/app/image/download/676'
+    user: 'http://localhost:8082/api/app/image/download/702'
 
 mail:
   default:
