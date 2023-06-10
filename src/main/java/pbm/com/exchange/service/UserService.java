@@ -91,7 +91,6 @@ public class UserService {
     @Autowired
     private TwilioService twilioService;
 
-    @Autowired
     private MailService mailService;
 
     @Autowired
@@ -108,8 +107,13 @@ public class UserService {
 
     @Value("${avatar.default.user}")
     private String DEFAULT_AVATAR;
+    
+    public UserService(MailService mailService) {
+		super();
+		this.mailService = mailService;
+	}
 
-    private static final Double DEFAULT_BALANCE = 0D;
+	private static final Double DEFAULT_BALANCE = 0D;
 
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
@@ -542,7 +546,7 @@ public class UserService {
          */
 
         // send activation link to mail
-        mailService.sendActivationEmail(newUser);
+        this.mailService.sendActivationEmail(newUser);
         return SignUpRes.builder().user(userRes).useOTP(true).status(true).build();
     }
 

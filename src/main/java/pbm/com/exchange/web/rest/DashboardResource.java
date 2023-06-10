@@ -22,7 +22,7 @@ public class DashboardResource {
         Long numberOfExchange = dashboardService.getNumberOfExchange();
         Double successPercentOfExchange = dashboardService.getSuccessPercentOfExchange();
         Long numberOfUser = dashboardService.getNumberOfUser();
-        DashboardDTO dashboardDTO = new DashboardDTO(numberOfProduct, numberOfExchange, numberOfUser, successPercentOfExchange);
+        DashboardDTO dashboardDTO = new DashboardDTO(numberOfExchange, numberOfProduct, numberOfUser, successPercentOfExchange);
         return ResponseEntity.ok().body(dashboardDTO);
     }
 }

@@ -35,7 +35,7 @@ public class DashboardServiceImpl implements DashboardService {
 
 	@Override
 	public Double getSuccessPercentOfExchange() {
-		Long numberOfSuccessExchange = exchangeRepository.countByStatus(ExchangeStatus.DONE);
+		Long numberOfSuccessExchange = exchangeRepository.countByStatus(ExchangeStatus.SWAPPING);
 		Long numberOfExchange = getNumberOfExchange();
 		
 		return numberOfSuccessExchange / (numberOfExchange * 1.0);
